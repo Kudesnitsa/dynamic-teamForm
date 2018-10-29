@@ -1,0 +1,29 @@
+<!--/<input  type="number" min="1" max="10" [ngModel]="countForms" (input)="setCount($event)">-->
+
+<mat-card class="result">
+  <mat-card-content>
+    <h2 class="example-h2">Result</h2>
+
+    <mat-slider
+      class="example-margin"
+      [max]="max"
+      [min]="min"
+      [step]="step"
+      [thumbLabel]="thumbLabel"
+      [tickInterval]="tickInterval"
+      [ngModel]="count"
+      (change)="setCount($event)">
+      >
+    </mat-slider>
+  </mat-card-content>
+</mat-card>
+
+
+{{countForms}}
+
+<form *ngFor="let user of users; let index = index;">
+
+<input [ngModel]="users[index].name">
+<input [ngModel]="users[index].email">
+<input [ngModel]="users[index].phone">
+</form>
