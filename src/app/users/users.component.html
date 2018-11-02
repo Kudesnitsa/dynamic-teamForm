@@ -3,27 +3,78 @@
 <mat-card class="result">
   <mat-card-content>
     <h2 class="example-h2">Result</h2>
-
     <mat-slider
       class="example-margin"
       [max]="max"
       [min]="min"
       [step]="step"
-      [thumbLabel]="thumbLabel"
       [tickInterval]="tickInterval"
       [ngModel]="count"
       (change)="setCount($event)">
       >
     </mat-slider>
+    {{count}}
   </mat-card-content>
 </mat-card>
 
+<form [formGroup]="singUpForm" novalidate (ngSubmit)="save(singUpForm)" *ngIf="!flag">
+  <fieldset class="box-users" formArrayName="users">
+    <div *ngFor="let user of singUpForm.controls.users.controls; let i = index;">
 
-{{countForms}}
+      <div [formGroupName]="i" class="b">
+        <button type="button"
+                *ngIf="singUpForm.controls.users.controls.length > 1"
+                (click)="removeUsers(i)">
+          X
+        </button>
+        <label>
+          Name
+          <input type="text" formControlName="name" placeholder="name">
 
-<form *ngFor="let user of users; let index = index;">
+          <div
+            [hidden]="singUpForm.controls.users.controls[i].controls.name.valid || singUpForm.controls.users.controls[i].controls.name.untouched"
+            class="alert alert-danger">
+            Name is required
+          </div>
 
-<input [ngModel]="users[index].name">
-<input [ngModel]="users[index].email">
-<input [ngModel]="users[index].phone">
+        </label>
+        <label>
+          Email
+          <input type="text" formControlName="email" placeholder="email">
+
+
+        </label>
+        <label>
+          Phone
+          <input type="text" formControlName="phone" placeholder="phone">
+          <div
+            [hidden]="singUpForm.controls.users.controls[i].controls.phone.valid  || singUpForm.controls.users.controls[i].controls.phone.untouched"
+            class="alert alert-danger">
+            phone is required.
+          </div>
+          <div
+            [hidden]="singUpForm.controls.users.controls[i].controls.phone.valid || singUpForm.controls.users.controls[i].controls.phone.pristine"
+            class="alert alert-danger">
+            Incorrect phone. example 0505050050
+          </div>
+        </label>
+      </div>
+
+    </div>
+    <button type="submit" [disabled]="!singUpForm.valid">Submit</button>
+  </fieldset>
 </form>
+<table *ngIf="flag">
+  <tr>
+    <th>№</th>
+    <th>name</th>
+    <th>email</th>
+    <th>phone</th>
+  </tr>
+  <tr *ngFor="let user of users; let i = index;">
+    <th>{{i+1}}</th>
+    <th>{{user['name']}}</th>
+    <th>{{user['email']}}</th>
+    <th>{{user['phone']}}</th>
+  </tr>
+</table>

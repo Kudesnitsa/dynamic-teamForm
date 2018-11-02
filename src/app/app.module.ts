@@ -6,6 +6,7 @@ import {UsersComponent} from './users/users.component';
 import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule, MatSliderModule, MatCardModule} from '@angular/material';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {MatButtonModule, MatCheckboxModule, MatSliderModule, MatCardModule} from
     MatCheckboxModule,
     MatButtonModule,
     MatSliderModule,
-    MatCardModule
+    MatCardModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
